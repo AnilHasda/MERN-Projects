@@ -66,15 +66,18 @@ const Form = () => {
     setId(id);
   }
   const updateData = async () => {
+  
       try {
         let response = await axios.put("http://localhost:4000/"+ id, {
           "name": name,
           "age": age,
         });
-        showData();
-        if(response){
+        if(response.status===200){
         alert("Data updated successfully");
         setBtnText("Add Data");
+        showData();
+        setName("");
+        setAge("");
         }
         else{
           alert("Failed to update data")

@@ -55,6 +55,7 @@ app.delete("/:id", async (req, resp) => {
     console.log(req.params.id)
     try{
  let query=await collection.updateOne({_id:new ObjectId(id)},{$set:req.body});
+   resp.send(query)
  console.log("Data updated successfull");
     }catch(error){
       console.log({"error":error});
