@@ -47,7 +47,8 @@ const Form = () => {
   //delete data
 
   async function deleteData(id) {
-    console.log(id);
+    let check=confirm("Do you want to delete item?");
+    if(check){
     let response = await axios.delete("http://localhost:4000/" + id);
 
     if (response.status === 200) {
@@ -56,6 +57,7 @@ const Form = () => {
     } else {
       alert("Failed to delete data");
     }
+  }
   }
 
   //function to update data
