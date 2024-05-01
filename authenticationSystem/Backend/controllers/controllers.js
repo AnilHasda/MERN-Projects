@@ -4,7 +4,6 @@ dotenv.config("../.env");
 let secret = process.env.SECRET_KEY;
 import express from "express";
 const app=express();
-app.use(express.json())
 import bcrypt from "bcryptjs";
 import { model } from "../model/model.js";
 export const getData = async (req, resp) => {

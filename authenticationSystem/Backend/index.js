@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import bcryptjs from "bcryptjs";
 import cors from "cors";
 import router from "./routes/routes.js";
 import connection from "./connection/connection.js";
@@ -10,11 +9,11 @@ dotenv.config();
 const app=express();
 app.use(cookieParser())
 app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 app.use(cors({  origin: "http://localhost:5173",
 methods: ["GET", "POST", "PUT", "DELETE"],
 credentials: true
 }))
-
 const port=process.env.PORT || 4000;
 app.use(router);
 // app.get("/",async (req,resp)=>{
