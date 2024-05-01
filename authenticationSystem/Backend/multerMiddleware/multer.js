@@ -4,7 +4,7 @@ const storage=multer.diskStorage({
      cb(null,"./upload");
     },
     filename:function (req,file,cb){
-        console.log(file)
+        console.log(file);
         cb(null,Date.now()+"-"+file.originalname);
     }
 })
@@ -20,5 +20,5 @@ const storage=multer.diskStorage({
 // }
 const checkData=multer({
     storage:storage,
-});
+}).single("profile")
 export default checkData;

@@ -8,7 +8,7 @@ import bcrypt from "bcryptjs";
 import { model } from "../model/model.js";
 export const getData = async (req, resp) => {
   let query = await model.find();
-  resp.send(query);
+  resp.json(query);
 };
 export const insertData = async (req, resp) => {
   console.log(req.file);
@@ -21,20 +21,20 @@ export const insertData = async (req, resp) => {
       if (checkUser) {
         resp.send("user already exist");
       } else {
-        let query = new model(req.body);
+        let query = new model({...req.body,profile:req.file.filename});
         let result = await query.save();
         if (result) {
           let token = jwt.sign(req.body, secret);
             resp.cookie("token", token, { httpOnly: true});
-          resp.send("data inserted successfully and cookie set");
+          resp.send({message:"data inserted successfully and cookie set",userLogged:true});
         } else {
           console.log("failed to insert data");
-          resp.send("failed to insert data");
+          resp.send({message:"failed to insert data"});
         }
       }
     }
   } catch (error) {
-    resp.send("error whlile inserting data");
+    resp.send({message:"error whlile inserting data"});
     console.log(error);
   }
 };
@@ -47,17 +47,17 @@ if(checkUser){
   if(checkPass){
     let token = jwt.sign(req.body,secret);
     resp.cookie("token",token,{httpOnly:true});
-    resp.send("user login")
+    resp.send({message:"user login",userLogged:true})
   }
   else{
-    resp.send("password doesnot match");
+    resp.send({message:"password doesnot match"});
   }
 }
 else{
-  resp.send("user doesnot match! Please enter valid user");
+  resp.send({message:"user doesnot match! Please enter valid user"});
 }
   }catch(error){
-    resp.send("error occurs"+error);
+    resp.send({message:"error occurs"+error});
   }
 }
 export {LoginSystem};
