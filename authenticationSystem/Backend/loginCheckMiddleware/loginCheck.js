@@ -3,7 +3,8 @@ const checkLogin=(req,resp,next)=>{
     let token=req.cookies.token;
     if(!token){
         // resp.send("please login or register to get token")
-        resp.redirect("http://localhost:5173/login");
+        // resp.redirect("http://localhost:5173/login");
+        resp.json({message:"no token available",req})
 
     }
     else{
@@ -13,7 +14,8 @@ const checkLogin=(req,resp,next)=>{
         next();
     }
 catch(error){
-    resp.send("unauthorized token")
+    req.errorMessage="unauthorized token";
+    resp.json({message:"unauthorized token"})
 }
     }
 }
