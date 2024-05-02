@@ -7,6 +7,7 @@ import Store from './App/store.js';
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ShowAll from './components/ShowAll.jsx';
+import Profile from './components/Profile.jsx';
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import PageNotFound from './components/PageNotFound.jsx';
 const router=createBrowserRouter(
@@ -22,6 +23,10 @@ const router=createBrowserRouter(
       {
         path:"/signup",
         element:<SignUp/>
+      },
+      {
+        path:"/profile",
+        element:<Profile/>
       },
     ]
     },

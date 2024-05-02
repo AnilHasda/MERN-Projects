@@ -7,9 +7,9 @@ const ShowAll = () => {
   let dispatch = useDispatch();
   async function getData() {
     try {
-      let response = await axios.get("http://localhost:3000/");
-      //dispatch(updateData(response.data));
-      console.log(response)
+      let response = await axios.get("http://localhost:3000");
+      dispatch(updateData(response.data));
+      console.log(response.data)
     } catch (error) {
       console.log(error);
     }

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 let initialState={
     datas:[],
 }
-let CreateSlice=createSlice({
+let slice1=createSlice({
     name:"data",
     initialState,
     reducers:{
@@ -11,5 +11,23 @@ let CreateSlice=createSlice({
         }
     }
 });
-export const {updateData}=CreateSlice.actions;
-export default CreateSlice.reducer;
+let slice2=createSlice({
+    initialState:{userLogged:false},
+    name:"authSlice",
+    reducers:{
+        updateLogged:(state,action)=>{
+            state.userLogged=true;
+        },
+        logout:(state,action)=>{
+            state.userLogged=false;
+        }
+    }
+})
+export const {updateData}=slice1.actions;
+export const {updateLogged,logout}=slice2.actions;
+const reducer={
+    slice1:slice1.reducer,
+    slice2:slice2.reducer
+}
+export default reducer;
+
