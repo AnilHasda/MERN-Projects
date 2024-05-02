@@ -10,8 +10,12 @@ const Profile = () => {
 let response=await axios.get("http://localhost:3000/frontendLogginCheck",{
 withCredentials: true
     })
+    console.log(response)
 if(response.data.userLogged){
   dispatch(updateLogged());
+}
+else{
+  dispatch(logout())
 }
     }
     useEffect(()=>{
