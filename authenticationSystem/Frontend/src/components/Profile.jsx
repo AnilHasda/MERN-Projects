@@ -1,26 +1,7 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import {useSelector,useDispatch} from "react-redux";
-import { updateLogged } from "../slices/Slices";
-import { logout } from "../slices/Slices";
+import React from "react";
+import useCheckLogin from "../checkLoggin/useCheckLogin";
 const Profile = () => {
-    let logged=useSelector(state=>state.slice2 && state.slice2.userLogged);
-    let dispatch=useDispatch();
-    const checkLoggin=async ()=>{
-let response=await axios.get("http://localhost:3000/frontendLogginCheck",{
-withCredentials: true
-    })
-    console.log(response)
-if(response.data.userLogged){
-  dispatch(updateLogged());
-}
-else{
-  dispatch(logout())
-}
-    }
-    useEffect(()=>{
-checkLoggin();
-    },[])
+  let logged=useCheckLogin();
   return (
     <>
     {(logged===true) ?
